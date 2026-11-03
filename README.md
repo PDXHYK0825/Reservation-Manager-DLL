@@ -67,14 +67,4 @@ powershell -ExecutionPolicy Bypass -File .\tools\Build.ps1 -QtRoot '..\..\Qt\QT6
 
 交接时提供本模块的公开头文件、同一配置的 `.lib/.dll` 和测试结果；调用方无需取得实现 `.cpp`。公共接口或模型变更时，先重建提供方，再依次重建受影响模块，避免头文件与 DLL 不匹配。各模块统一 Qt/MSVC 版本、x64 和 Debug/Release，调用方不定义提供方的导出宏。
 
-## 精简范围与验证记录
 
-项目保留一份源码、一份构建脚本和本说明。阶段版本、重复成员包、重复 ZIP、旧截图和运行包移到项目外备份。构建产物和逐项日志可再生成，已列入 `.gitignore`。
-
-验收入口是 `tools/Build.ps1`。业务场景合计 161 项，每种配置的 Qt Test XML 另含 8 项初始化/清理。逐项结果在生成的 `verification` 目录。
-
-2026-11-03 整理后验证：Debug、Release 各 161 项业务场景全部通过，共 322 次，失败、错误及跳过均为 0。八个工程的实现输入均位于本工作包；Release 主程序的实际依赖包含 `Reservation.dll`、`AttendanceViolation.dll`、`DataStatistics.dll`，三个业务库的公开导出已检查。验证使用当前 Windows 环境中的自动化构建与 Qt Test。
-
-精简源码共 61 个文件（不含 `.git` 与生成产物）。本次逐项日志与已验证的构建产物保存在项目外备份，运行构建脚本可重新生成。
-
-同日补充首次启动验证：根解决方案已配置三个 DLL 的生成依赖，在没有已发布公共头文件的情况下直接生成 Debug 成功；已在 Visual Studio 中按 F5 打开登录窗口。

@@ -1,0 +1,27 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "DataStatistics", "DataStatistics.vcxproj", "{5875D29B-CC47-5946-9B3A-0E0647D0700B}"
+EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "DataStatisticsTests", "DataStatisticsTests.vcxproj", "{44AEFF8A-1748-558C-8A61-E5DDC1628FDD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5875D29B-CC47-5946-9B3A-0E0647D0700B} = {5875D29B-CC47-5946-9B3A-0E0647D0700B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5875D29B-CC47-5946-9B3A-0E0647D0700B}.Debug|x64.ActiveCfg = Debug|x64
+		{5875D29B-CC47-5946-9B3A-0E0647D0700B}.Debug|x64.Build.0 = Debug|x64
+		{5875D29B-CC47-5946-9B3A-0E0647D0700B}.Release|x64.ActiveCfg = Release|x64
+		{5875D29B-CC47-5946-9B3A-0E0647D0700B}.Release|x64.Build.0 = Release|x64
+		{44AEFF8A-1748-558C-8A61-E5DDC1628FDD}.Debug|x64.ActiveCfg = Debug|x64
+		{44AEFF8A-1748-558C-8A61-E5DDC1628FDD}.Debug|x64.Build.0 = Debug|x64
+		{44AEFF8A-1748-558C-8A61-E5DDC1628FDD}.Release|x64.ActiveCfg = Release|x64
+		{44AEFF8A-1748-558C-8A61-E5DDC1628FDD}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+EndGlobal

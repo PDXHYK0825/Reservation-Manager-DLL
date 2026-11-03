@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="Qt_Runtime.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(CommonLibRoot)Shared\include;$(CommonLibRoot)DataStatistics\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(CommonLibRoot)DataStatistics\lib\x64\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>DataStatistics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>if "$(ConfigurationType)"=="Application" copy /Y "$(CommonLibRoot)DataStatistics\bin\x64\$(Configuration)\DataStatistics.dll" "$(TargetDir)"
+%(PostBuildEvent.Command)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+</Project>

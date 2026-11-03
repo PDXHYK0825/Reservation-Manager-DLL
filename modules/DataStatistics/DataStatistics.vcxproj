@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64"><Configuration>Debug</Configuration><Platform>x64</Platform></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals"><ProjectGuid>{5875D29B-CC47-5946-9B3A-0E0647D0700B}</ProjectGuid><RootNamespace>DataStatistics</RootNamespace><WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType><PlatformToolset>v143</PlatformToolset><CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries Condition="'$(Configuration)' == 'Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)' == 'Release'">false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets"><Import Project="..\..\commonlibdll\Qt_Runtime.props" /></ImportGroup>
+  <PropertyGroup>
+    <OutDir>$(CommonLibRoot)DataStatistics\bin\x64\$(Configuration)\</OutDir><IntDir>$(ProjectDir)obj\$(ProjectName)\x64\$(Configuration)\</IntDir>
+    <MocDefinitions>-DDATA_STATISTICS_EXPORTS</MocDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel><PrecompiledHeader>NotUsing</PrecompiledHeader><LanguageStandard>stdcpp17</LanguageStandard><ExceptionHandling>Sync</ExceptionHandling>
+      <AdditionalOptions>/utf-8 /Zc:__cplusplus /permissive- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)shared\include;$(IntDir);$(CommonLibRoot)Shared\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DATA_STATISTICS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link><SubSystem>Console</SubSystem><GenerateDebugInformation>true</GenerateDebugInformation><ImportLibrary>$(CommonLibRoot)DataStatistics\lib\x64\$(Configuration)\DataStatistics.lib</ImportLibrary></Link>
+    <PostBuildEvent><Command>xcopy /E /I /Y "$(ProjectDir)include\DataStatistics" "$(CommonLibRoot)DataStatistics\include\DataStatistics\"
+copy /Y "$(ProjectDir)shared\include\*.h" "$(CommonLibRoot)Shared\include\"
+%(PostBuildEvent.Command)</Command></PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\JsonStore.cpp" />
+    <ClCompile Include="src\StatisticsManager.cpp" />
+    <ClCompile Include="src\StatisticsPage.cpp" />
+    <ClInclude Include="include\DataStatistics\Export.h" />
+    <ClInclude Include="include\DataStatistics\JsonStore.h" />
+    <ClInclude Include="include\DataStatistics\StatisticsManager.h" />
+    <ClInclude Include="include\DataStatistics\StatisticsPage.h" />
+    <ClCompile Include="$(IntDir)moc_JsonStore.cpp" />
+    <MocInput Include="include\DataStatistics\JsonStore.h"><OutputFile>$(IntDir)moc_JsonStore.cpp</OutputFile></MocInput>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\..\commonlibdll\QtMoc.targets" />
+</Project>

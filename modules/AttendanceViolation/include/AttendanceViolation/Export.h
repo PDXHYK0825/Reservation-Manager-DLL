@@ -1,0 +1,9 @@
+﻿#pragma once
+
+#include <QtGlobal>
+
+#if defined(ATTENDANCE_VIOLATION_EXPORTS)
+#define ATTENDANCE_VIOLATION_API Q_DECL_EXPORT
+#else
+#define ATTENDANCE_VIOLATION_API Q_DECL_IMPORT
+#endif

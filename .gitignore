@@ -1,0 +1,10 @@
+﻿/.vs/
+/bin/
+/verification/
+/modules/**/obj/
+/commonlibdll/Shared/
+/commonlibdll/Reservation/
+/commonlibdll/AttendanceViolation/
+/commonlibdll/DataStatistics/
+**/*.user
+**/study_room_data.json

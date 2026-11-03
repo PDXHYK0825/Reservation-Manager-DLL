@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="UseReservation.props" />
+  <ItemDefinitionGroup>
+    <ClCompile><AdditionalIncludeDirectories>$(CommonLibRoot)AttendanceViolation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(CommonLibRoot)AttendanceViolation\lib\x64\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AttendanceViolation.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent><Command>if "$(ConfigurationType)"=="Application" copy /Y "$(CommonLibRoot)AttendanceViolation\bin\x64\$(Configuration)\AttendanceViolation.dll" "$(TargetDir)"
+%(PostBuildEvent.Command)</Command></PostBuildEvent>
+  </ItemDefinitionGroup>
+</Project>

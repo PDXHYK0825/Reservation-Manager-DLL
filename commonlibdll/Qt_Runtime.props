@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\QtPaths.props" Condition="Exists('..\QtPaths.props')" />
+  <PropertyGroup>
+    <QtSdkRoot>$([System.IO.Path]::GetFullPath('$(QtSdkRoot)'))</QtSdkRoot>
+    <CommonLibRoot>$(MSBuildThisFileDirectory)</CommonLibRoot>
+    <QtDebugSuffix Condition="'$(Configuration)' == 'Debug'">d</QtDebugSuffix>
+    <QtDebugSuffix Condition="'$(Configuration)' != 'Debug'"></QtDebugSuffix>
+    <LocalDebuggerEnvironment>PATH=$(QtSdkRoot)\bin;%PATH%</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(QtSdkRoot)\include;$(QtSdkRoot)\include\QtCore;$(QtSdkRoot)\include\QtGui;$(QtSdkRoot)\include\QtWidgets;$(QtSdkRoot)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;_UNICODE;_ENABLE_EXTENDED_ALIGNED_STORAGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)' == 'Release'">QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;_UNICODE;_ENABLE_EXTENDED_ALIGNED_STORAGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(QtSdkRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Qt6Core$(QtDebugSuffix).lib;Qt6Gui$(QtDebugSuffix).lib;Qt6Widgets$(QtDebugSuffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="CheckQtSdkPath" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(QtSdkRoot)\include\QtCore\QObject')" Text="Set QtSdkRoot in QtPaths.props to the Qt 6.11.2 msvc2022_64 directory." />
+  </Target>
+  <Target Name="PrepareInterfaceDirectories" BeforeTargets="PrepareForBuild"
+          Condition="'$(ConfigurationType)' == 'DynamicLibrary'">
+    <MakeDir Directories="$(CommonLibRoot)$(TargetName)\lib\x64\$(Configuration);$(CommonLibRoot)Shared\include" />
+  </Target>
+</Project>

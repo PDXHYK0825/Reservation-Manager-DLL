@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="GenerateQtMetaObjects" BeforeTargets="ClCompile"
+          Condition="'@(MocInput)' != ''"
+          Inputs="@(MocInput)" Outputs="@(MocInput->'%(OutputFile)')">
+    <MakeDir Directories="$(IntDir)" />
+    <Exec Command="&quot;$(QtSdkRoot)\bin\moc.exe&quot; $(MocDefinitions) -I&quot;$(QtSdkRoot)\include&quot; -I&quot;$(QtSdkRoot)\include\QtCore&quot; -I&quot;$(QtSdkRoot)\include\QtGui&quot; -I&quot;$(QtSdkRoot)\include\QtWidgets&quot; -I&quot;$(QtSdkRoot)\include\QtTest&quot; -I&quot;$(ProjectDir)include&quot; -I&quot;$(ProjectDir)shared\include&quot; -I&quot;$(CommonLibRoot)Shared\include&quot; &quot;%(MocInput.FullPath)&quot; -o &quot;%(MocInput.OutputFile)&quot;" />
+  </Target>
+</Project>

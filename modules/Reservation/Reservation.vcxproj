@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64"><Configuration>Debug</Configuration><Platform>x64</Platform></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals"><ProjectGuid>{8411872A-B83A-51D5-A91D-697D9A5F2F69}</ProjectGuid><RootNamespace>Reservation</RootNamespace><WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType><PlatformToolset>v143</PlatformToolset><CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries Condition="'$(Configuration)' == 'Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)' == 'Release'">false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets"><Import Project="..\..\commonlibdll\UseDataStatistics.props" /></ImportGroup>
+  <PropertyGroup>
+    <OutDir>$(CommonLibRoot)Reservation\bin\x64\$(Configuration)\</OutDir><IntDir>$(ProjectDir)obj\$(ProjectName)\x64\$(Configuration)\</IntDir>
+    <MocDefinitions>-DRESERVATION_EXPORTS</MocDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel><PrecompiledHeader>NotUsing</PrecompiledHeader><LanguageStandard>stdcpp17</LanguageStandard><ExceptionHandling>Sync</ExceptionHandling>
+      <AdditionalOptions>/utf-8 /Zc:__cplusplus /permissive- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(IntDir);$(CommonLibRoot)Shared\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RESERVATION_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link><SubSystem>Console</SubSystem><GenerateDebugInformation>true</GenerateDebugInformation><ImportLibrary>$(CommonLibRoot)Reservation\lib\x64\$(Configuration)\Reservation.lib</ImportLibrary></Link>
+    <PostBuildEvent><Command>xcopy /E /I /Y "$(ProjectDir)include\Reservation" "$(CommonLibRoot)Reservation\include\Reservation\"
+%(PostBuildEvent.Command)</Command></PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ReservationManager.cpp" />
+    <ClCompile Include="src\ReservationRules.cpp" />
+    <ClCompile Include="src\ReservationPage.cpp" />
+    <ClInclude Include="include\Reservation\Export.h" />
+    <ClInclude Include="include\Reservation\ReservationManager.h" />
+    <ClInclude Include="include\Reservation\ReservationPage.h" />
+    <ClInclude Include="include\Reservation\ReservationRules.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\..\commonlibdll\QtMoc.targets" />
+</Project>
